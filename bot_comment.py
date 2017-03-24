@@ -42,7 +42,7 @@ def post_comment(thread):
             comment = thread.add_comment(comment)
             comment_posted = True
         except:
-            print "Failed to post comment to thread %s" % mThread.permalink
+            print "Failed to post comment to thread: %s" % mThread.permalink
             time.sleep(30)
 
     while not comment_stored:
@@ -50,7 +50,7 @@ def post_comment(thread):
             thread_database.add_comment_link(thread.permalink, comment.id)
             comment_stored = True
         except:
-            print "Failed to store comment to thread %s" % thread.permalink
+            print "Retrying to store comment to db to thread: %s" % thread.permalink
     
         
 def edit_comment(thread, comment):
@@ -65,15 +65,22 @@ def edit_comment(thread, comment):
         upvotes = int("{:.0f}".format(upvotes))
         downvotes = int("{:.0f}".format(downvotes))
         total_votes = int("{:.0f}".format(upvotes + downvotes))
-        comment.edit("----------Updated----------\n\n" \
-                      + "This post is " + upvote_ratio_str \
-                      + "% upvoted\n\n" \
-                      + "Total votes: " + str(total_votes) + "\n\n" \
-                      + "Upvotes: " + str(upvotes) + "\n\n" \
-                      + "Downvotes: " + str(downvotes) + "\n\n" \
-                      + "Brigade_Detector_Bot made by u/joeymp\n\n")
-        print "updated comment: %s" % comment.permalink
-        print datetime.datetime.utcnow()
+        comment_updated = False
+        while not comment_updated:
+            try:
+                comment.edit("----------Updated----------\n\n" \
+                              + "This post is " + upvote_ratio_str \
+                              + "% upvoted\n\n" \
+                              + "Total votes: " + str(total_votes) + "\n\n" \
+                              + "Upvotes: " + str(upvotes) + "\n\n" \
+                              + "Downvotes: " + str(downvotes) + "\n\n" \
+                              + "Brigade_Detector_Bot made by u/joeymp\n\n")
+                comment_updated = True
+                print "updated comment: %s" % comment.permalink
+                print datetime.datetime.utcnow()
+            except:
+                print "Failed to update comment: %s" % comment.permalink
+
         return False
     else:
         thread_database.delete_thread(thread.permalink)
