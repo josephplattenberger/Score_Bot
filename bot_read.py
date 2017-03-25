@@ -27,11 +27,11 @@ def get_thread(r):
            thread = r.get_submission(submission.permalink)
            connect_to_reddit = True
         except requests.ConnectionError as e:
-            print e
             print "\n------ConnectionError------\n"
-        except requests.HTTPError as e:
             print e
+        except requests.HTTPError as e:
             print "\n---------HTTPError---------\n"
+            print e
     return thread
 
 ###############################################
