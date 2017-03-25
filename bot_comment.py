@@ -7,7 +7,7 @@ import praw
 def calculate_votes(score, upvote_ratio):
     # if ratio is .5 then function would've given a divide by zero error
     if upvote_ratio == .5:
-        return sys.maxint, -sys.maxint
+        return sys.maxint, sys.maxint
     down = score * (1 - upvote_ratio) / (2 * upvote_ratio - 1)
     up = score + down
     return up, down
