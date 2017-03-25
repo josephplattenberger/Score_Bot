@@ -13,8 +13,11 @@ def get_sub(r):
             subreddit = r.get_subreddit('test').get_hot(limit=25)
             connect_to_reddit = True
         except requests.ConnectionError as e:
+            print "\n------ConnectionError------\n"
             print e
-            print "\n------ConnectionError------"
+        except requests.HTTPError as e:
+            print "\n---------HTTPError---------\n"
+            print e
     return subreddit
 
 def get_thread(r):
@@ -25,7 +28,10 @@ def get_thread(r):
            connect_to_reddit = True
         except requests.ConnectionError as e:
             print e
-            print "\n------ConnectionError------"
+            print "\n------ConnectionError------\n"
+        except requests.HTTPError as e:
+            print e
+            print "\n---------HTTPError---------\n"
     return thread
 
 ###############################################
