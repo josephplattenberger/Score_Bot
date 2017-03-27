@@ -22,11 +22,13 @@ while True:
                         mComment = r.get_info(thing_id = comment_id)
                         connect_to_reddit = True
                     except requests.ConnectionError as e:
-                        print "\n------ConnectionError------\n"
+                        print "\n------ConnectionError------"
                         print e
+                        print "---------------------------\n"
                     except requests.HTTPError as e:
-                        print "\n---------HTTPError---------\n"
+                        print "\n---------HTTPError---------"
                         print e
+                        print "---------------------------\n"
                 delete_flag = edit_comment(mThread, mComment)
             if delete_flag:
                 break
