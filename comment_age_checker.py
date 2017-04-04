@@ -25,8 +25,8 @@ while True:
                         print "\n------ConnectionError------"
                         print e
                         print "---------------------------\n"
-                    except requests.HTTPError as e:
-                        print "\n---------HTTPError---------"
+                    except Exception as e:
+                        print "\n-----------Error-----------"
                         print e
                         print "---------------------------\n"
                 delete_flag = edit_comment(mThread, mComment)

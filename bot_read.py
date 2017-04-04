@@ -17,8 +17,8 @@ def get_sub(r):
             print "from bot_read.py: get_sub\n"
             print e
             print "---------------------------\n"
-        except requests.HTTPError as e:
-            print "\n---------HTTPError---------"
+        except Exception as e:
+            print "\n-----------Error-----------"
             print "from bot_read.py: get_sub\n"
             print e
             print "---------------------------\n"
@@ -35,8 +35,8 @@ def get_thread(r, submission):
             print "from bot_read.py: get_thread\n"
             print e
             print "---------------------------\n"
-        except requests.HTTPError as e:
-            print "\n---------HTTPError---------"
+        except Exception as e:
+            print "\n-----------Error-----------"
             print "from bot_read.py: get_thread\n"
             print e
             print "---------------------------\n"
@@ -74,6 +74,11 @@ while True:
         time.sleep(600)
     except requests.ConnectionError as e:
         print "\n------ConnectionError------"
+        print "from bot_read.py: main script\n"
+        print e
+        print "---------------------------\n"
+    except Exception as e:
+        print "\n-----------Error-----------"
         print "from bot_read.py: main script\n"
         print e
         print "---------------------------\n"
